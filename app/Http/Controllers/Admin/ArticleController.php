@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -15,8 +16,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
-    }
+      $users_id = Auth::id();
+      $articles = Article::where('user_id', $users_id)->get();
+      return view('admin.posts.index', compact('articles'));
+      }
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +28,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -36,7 +39,26 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = $request->all();
+
+      $request->validate([
+        'title' => "required|max:30",
+        'content' => "required|max:500",
+        'slug' => "required|max:60",
+        'excerpt' => "required|max:50",
+
+      ]);
+      $users_id = Auth::id();
+      $article = new Article;
+      $article->title = $data['title'];
+      $article->content = $data['content'];
+      $article->excerpt = $data['excerpt'];
+      $article->slug = $data['slug'];
+      $article->user_id = $users_id;
+
+      $article->save();
+
+      return redirect()->route('posts.index', $article);
     }
 
     /**
@@ -45,9 +67,10 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        //
+        $article = Article::find($id);
+        return view('admin.posts.show', ["article" => $article]);
     }
 
     /**
@@ -56,9 +79,11 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //
+      $article = Article::find($id);
+
+      return view('admin.posts.edit', compact('article'));
     }
 
     /**
@@ -68,9 +93,27 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $request->validate([
+          'title' => "required|max:30",
+          'content' => "required|max:500",
+          'slug' => "required|max:60",
+          'excerpt' => "required|max:50",
+
+        ]);
+
+        $article = Article::find($id);
+        $article->title = $data['title'];
+        $article->content = $data['content'];
+        $article->excerpt = $data['excerpt'];
+        $article->slug = $data['slug'];
+
+        $article->update();
+
+        return redirect()->route('posts.index', $article);
+
     }
 
     /**
@@ -79,8 +122,10 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+        return redirect()->route('posts.index');
     }
 }
