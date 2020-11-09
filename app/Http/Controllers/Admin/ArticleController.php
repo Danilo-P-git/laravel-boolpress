@@ -58,7 +58,7 @@ class ArticleController extends Controller
 
       $article->save();
 
-      return redirect()->route('posts.index', $article);
+      return redirect()->route('admin.posts.index', $article);
     }
 
     /**
@@ -112,7 +112,7 @@ class ArticleController extends Controller
 
         $article->update();
 
-        return redirect()->route('posts.index', $article);
+        return redirect()->route('admin.posts.index', $article);
 
     }
 
@@ -126,6 +126,6 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $article->delete();
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
 }

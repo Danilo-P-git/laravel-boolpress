@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <a href="{{route('posts.create')}}" class="btn btn-primary" >Create a new article</a>
+        <a href="{{route('admin.posts.create')}}" class="btn btn-primary" >Create a new article</a>
       </div>
     </div>
     <table class="table">
@@ -22,8 +22,8 @@
         <td>{{$article->slug}}</td>
         <td>{{$article->content}}</td>
         <td>
-          <a href="{{route('posts.show', $article)}}">View</a>
-          <a href="{{route('posts.edit', $article)}}">Edit</a>
+          <a href="{{route('admin.posts.show', $article)}}">View</a>
+          <a href="{{route('admin.posts.edit', $article)}}">Edit</a>
 
 
         </td>

@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <form action="{{route('posts.update', $article->id)}}" method="POST">
+    <form action="{{route('admin.posts.update', $article->id)}}" method="POST">
     @method('PUT')
     @csrf
     <div class="form-group">

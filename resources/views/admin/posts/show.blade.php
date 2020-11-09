@@ -11,7 +11,7 @@
       <p>{{$article->excerpt}}</p>
     </div>
 
-    <form action="{{route('posts.destroy', $article->id)}}" method="POST">
+    <form action="{{route('admin.posts.destroy', $article->id)}}" method="POST">
     @method("DELETE")
     @csrf
     <button type="submit" value="delete" class="btn btn-danger">Delete</button>
