@@ -26,4 +26,4 @@ Route::prefix('admin')->name("admin.")->namespace('Admin')->middleware('auth')->
   Route::resource('posts', 'ArticleController');
 });
 Route::get("posts", "ArticleController@index")->name("posts.index");
-Route::get("posts/{slug}", "ArticleController@show")->name("posts.show");
+Route::get("posts/{id}", "ArticleController@show")->name("posts.show");
