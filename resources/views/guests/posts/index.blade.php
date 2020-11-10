@@ -22,6 +22,7 @@
             <h2 class="card-title">{{$article->title}}</h2>
             <p class="card-text">{{$article->slug}}</p>
             <a href="{{route("posts.show", $article->id)}}" class="btn btn-primary">Read More &rarr;</a>
+            <p>{{$article->user->name}}</p>
           </div>
         </div>
         @endforeach
