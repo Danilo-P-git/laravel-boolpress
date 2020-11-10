@@ -24,6 +24,7 @@ class ArticleSeeder extends Seeder
           $newArticle->content = $faker->paragraph(6, true);
           $newArticle->excerpt = $faker->sentence(1);
           $newArticle->slug = Str::of($newArticle->title)->slug('-');
+          $newArticle->image = $faker->imageUrl(500,300);
           $newArticle->save();
         }
     }

@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <form action="{{route('posts.store')}}" method="POST">
+    <form action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('post')
     <div class="form-group">
@@ -21,6 +21,10 @@
   <div class="form-group">
     <label for="content">Content</label>
     <textarea name="content" class="form-control" id="content"> </textarea>
+  </div>
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" name="image" class="form-control" id="image" accept="image/*">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
   </form>

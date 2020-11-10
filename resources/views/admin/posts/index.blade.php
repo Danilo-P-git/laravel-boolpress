@@ -10,6 +10,7 @@
     <table class="table">
   <thead>
     <tr>
+      <th scope="col">Immagine</th>
       <th scope="col">Titolo</th>
       <th scope="col">Slug</th>
       <th scope="col">Contenuto</th>
@@ -18,6 +19,7 @@
   <tbody>
     @foreach ($articles as $article)
       <tr>
+        <td> <img class="rounded img-fluid" src="{{asset('storage/'.$article->image)}}" alt=""> </td>        
         <td>{{$article->title}}</td>
         <td>{{$article->slug}}</td>
         <td>{{$article->content}}</td>

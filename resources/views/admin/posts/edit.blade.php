@@ -3,8 +3,8 @@
 @section('content')
   <div class="container">
     <form action="{{route('admin.posts.update', $article->id)}}" method="POST">
-    @method('PUT')
     @csrf
+    @method('PUT')
     <div class="form-group">
     <label for="title">title</label>
     <input name="title" type="text" id="title" class="form-control" value="{{ $article->title }}">
@@ -22,7 +22,12 @@
     <label for="content">Content</label>
     <textarea name="content" class="form-control" id="content"> {{ $article->content }} </textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" name="image" class="form-control" id="image" accept="image/*">
+  </div>
+  <input type="submit" class="btn btn-primary" value="Update">
   </form>
   </div>
 @endsection

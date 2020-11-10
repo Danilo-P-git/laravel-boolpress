@@ -16,8 +16,21 @@
         @foreach ($articles as $article)
 
 
+          {{-- @php
+          $test = ""
+          if(url('storage/'.$article->image) == null) {
+            $test="ciao"
+
+          }
+          else {
+            $test="Stupido"
+
+          }
+          @endphp --}}
+
         <!-- Blog Post -->
         <div class="card mb-4">
+          <img class="card-img-top" src="{{asset('storage/'.$article->image)}}" alt="Card image cap">
           <div class="card-body">
             <h2 class="card-title">{{$article->title}}</h2>
             <p class="card-text">{{$article->slug}}</p>

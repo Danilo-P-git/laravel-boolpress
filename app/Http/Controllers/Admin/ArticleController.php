@@ -6,6 +6,7 @@ use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -46,8 +47,11 @@ class ArticleController extends Controller
         'content' => "required|max:500",
         'slug' => "required|max:60",
         'excerpt' => "required|max:50",
-
+        'image' => "image",
       ]);
+
+      $path = Storage::disk('public')->put('images', $data['image']);
+
       $users_id = Auth::id();
       $article = new Article;
       $article->title = $data['title'];
@@ -55,6 +59,7 @@ class ArticleController extends Controller
       $article->excerpt = $data['excerpt'];
       $article->slug = $data['slug'];
       $article->user_id = $users_id;
+      $article->image = $path;
 
       $article->save();
 
@@ -82,7 +87,6 @@ class ArticleController extends Controller
     public function edit($id)
     {
       $article = Article::find($id);
-
       return view('admin.posts.edit', compact('article'));
     }
 
@@ -101,15 +105,17 @@ class ArticleController extends Controller
           'content' => "required|max:500",
           'slug' => "required|max:60",
           'excerpt' => "required|max:50",
+          'image' => "image",
 
         ]);
 
+        $path = Storage::disk('public')->put('images', $data['image']);
         $article = Article::find($id);
         $article->title = $data['title'];
         $article->content = $data['content'];
         $article->excerpt = $data['excerpt'];
         $article->slug = $data['slug'];
-
+        $article->image = $path;
         $article->update();
 
         return redirect()->route('admin.posts.index', $article);
