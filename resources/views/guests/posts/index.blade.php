@@ -14,23 +14,24 @@
           <small>Secondary Text</small>
         </h1>
         @foreach ($articles as $article)
+          <?php
+          $image = $article->image;
+          $pos = strpos($image, "placeholder");
+
+           ?>
 
 
-          {{-- @php
-          $test = ""
-          if(url('storage/'.$article->image) == null) {
-            $test="ciao"
-
-          }
-          else {
-            $test="Stupido"
-
-          }
-          @endphp --}}
 
         <!-- Blog Post -->
         <div class="card mb-4">
-          <img class="card-img-top" src="{{asset('storage/'.$article->image)}}" alt="Card image cap">
+          <?php if ($pos === false) {?>
+            <img class="card-img-top" src=" {{asset('storage/'.$article->image)}}" alt="Card image cap">
+
+          <?php } else {?>
+              <img class="card-img-top" src="{{$article->image}}" alt="Card image cap">
+          <?php }?>
+
+
           <div class="card-body">
             <h2 class="card-title">{{$article->title}}</h2>
             <p class="card-text">{{$article->slug}}</p>

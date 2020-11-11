@@ -1,9 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+  <?php
+  $image = $article->image;
+  $pos = strpos($image, "placeholder");
+
+   ?>
+
   <div class="container">
     <div class="container-fluid text-center">
-      <img class="img-fluid" src="{{asset('storage/'.$article->image)}}" alt="">
+      <?php if ($pos === false) {?>
+        <img class="img-fluid" src=" {{asset('storage/'.$article->image)}}" alt="Card image cap">
+
+      <?php } else {?>
+          <img class="img-fluid" src="{{$article->image}}" alt="Card image cap">
+      <?php }?>
     </div>
     <h1>{{$article->title}}</h1>
     <div>

@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <form action="{{route('admin.posts.update', $article->id)}}" method="POST">
+    <form action="{{route('admin.posts.update', $article->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -31,7 +31,7 @@
   </form>
   </div>
 
-  
+
   @if ($errors->any())
   <div class="alert alert-danger">
     <ul>
