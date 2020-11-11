@@ -43,7 +43,7 @@ class ArticleController extends Controller
       $data = $request->all();
 
       $request->validate([
-        'title' => "required|max:30",
+        'title' => "required|max:50",
         'content' => "required|max:500",
         'slug' => "required|max:60",
         'excerpt' => "required|max:50",
@@ -101,7 +101,7 @@ class ArticleController extends Controller
     {
         $data = $request->all();
         $request->validate([
-          'title' => "required|max:30",
+          'title' => "required|max:50",
           'content' => "required|max:500",
           'slug' => "required|max:60",
           'excerpt' => "required|max:50",
